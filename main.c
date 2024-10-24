@@ -24,7 +24,14 @@ char *p()
 
 int main()
 {
-	int a = open("test.txt",O_RDONLY);
-	char *s = get_next_line(a);
-	ft_putstr(s,1,10);
+	int c = open("42_with_nl",O_RDONLY);
+	char *s;
+	int i = 0;
+
+	s = get_next_line(c);
+	printf("%s",s);
+	s = get_next_line(c);
+	printf("%s",s);
+
 }
+
