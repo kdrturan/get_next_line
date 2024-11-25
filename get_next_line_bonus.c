@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abturan <abturan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 20:49:19 by abturan           #+#    #+#             */
-/*   Updated: 2024/10/27 22:11:49 by abturan          ###   ########.fr       */
+/*   Updated: 2024/10/27 22:14:52 by abturan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_readfile(int fd, char *leftstr)
 {
@@ -93,26 +93,26 @@ char	*new_leftstr(char *leftstr)
 char	*get_next_line(int fd)
 {
 	char		*buff;
-	static char	*leftstr;
+	static char	*leftstr[10240];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 10240 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (leftstr == NULL)
+	if (leftstr[fd] == NULL)
 	{
-		leftstr = malloc(sizeof(char) * 1);
-		if (!leftstr)
+		leftstr[fd] = malloc(sizeof(char) * 1);
+		if (!leftstr[fd])
 			return (NULL);
-		leftstr[0] = '\0';
+		leftstr[fd][0] = '\0';
 	}
-	leftstr = ft_readfile(fd, leftstr);
-	if (!leftstr || !*leftstr)
+	leftstr[fd] = ft_readfile(fd, leftstr[fd]);
+	if (!leftstr[fd] || !*leftstr[fd])
 	{
-		if (leftstr)
-			free(leftstr);
-		leftstr = NULL;
+		if (leftstr[fd])
+			free(leftstr[fd]);
+		leftstr[fd] = NULL;
 		return (NULL);
 	}
-	buff = ft_getline(leftstr);
-	leftstr = new_leftstr(leftstr);
+	buff = ft_getline(leftstr[fd]);
+	leftstr[fd] = new_leftstr(leftstr[fd]);
 	return (buff);
 }
