@@ -6,7 +6,7 @@
 /*   By: abturan <abturan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 20:49:19 by abturan           #+#    #+#             */
-/*   Updated: 2024/10/27 22:11:49 by abturan          ###   ########.fr       */
+/*   Updated: 2024/11/27 17:18:04 by abturan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_readfile(int fd, char *leftstr)
 		free(leftstr);
 		return (NULL);
 	}
-	while (!(ft_strchr(leftstr, '\n')) && bytes != 0)
+	while (!(ft_strchr_gnl(leftstr, '\n')) && bytes != 0)
 	{
 		bytes = read(fd, temp, BUFFER_SIZE);
 		if (bytes == -1)
@@ -34,7 +34,7 @@ char	*ft_readfile(int fd, char *leftstr)
 			return (NULL);
 		}
 		temp[bytes] = '\0';
-		leftstr = ft_strjoin(leftstr, temp);
+		leftstr = ft_strjoin_gnl(leftstr, temp);
 	}
 	free(temp);
 	return (leftstr);
@@ -74,7 +74,7 @@ char	*new_leftstr(char *leftstr)
 	i = 0;
 	while (leftstr[i] != '\n' && leftstr[i])
 		i++;
-	new_leftstr = ft_substr(leftstr, (i + 1), ft_strlen(leftstr) - i);
+	new_leftstr = ft_substr_gnl(leftstr, (i + 1), ft_strlen_gnl(leftstr) - i);
 	if (!new_leftstr)
 	{
 		free(leftstr);

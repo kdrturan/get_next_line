@@ -6,13 +6,13 @@
 /*   By: abturan <abturan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:02:45 by abturan           #+#    #+#             */
-/*   Updated: 2024/10/27 19:09:19 by abturan          ###   ########.fr       */
+/*   Updated: 2024/11/27 17:17:41 by abturan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *s)
+int	ft_strlen_gnl(char *s)
 {
 	int	i;
 
@@ -24,13 +24,13 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strdup(char *s1)
+char	*ft_strdup_gnl(char *s1)
 {
 	char	*p_strdup;
 	int		i;
 	int		size;
 
-	size = ft_strlen(s1);
+	size = ft_strlen_gnl(s1);
 	p_strdup = (char *)malloc(size + 1);
 	i = 0;
 	if (!p_strdup)
@@ -47,18 +47,18 @@ char	*ft_strdup(char *s1)
 	return (p_strdup);
 }
 
-char	*ft_substr(char *s, int start, int len)
+char	*ft_substr_gnl(char *s, int start, int len)
 {
 	char	*p_sstr;
 	int		i;
 	int		size;
 
-	if (ft_strlen(s) < start)
-		return (ft_strdup(""));
-	if ((ft_strlen(s) - start) > len)
+	if (ft_strlen_gnl(s) < start)
+		return (ft_strdup_gnl(""));
+	if ((ft_strlen_gnl(s) - start) > len)
 		size = len;
 	else
-		size = (ft_strlen(s) - start);
+		size = (ft_strlen_gnl(s) - start);
 	p_sstr = (char *)malloc(size + 1);
 	if (!p_sstr)
 	{
@@ -75,7 +75,7 @@ char	*ft_substr(char *s, int start, int len)
 	return (p_sstr);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	int		s1_len;
 	int		s2_len;
@@ -83,8 +83,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*strjoin;
 
 	i = 0;
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
+	s1_len = ft_strlen_gnl(s1);
+	s2_len = ft_strlen_gnl(s2);
 	strjoin = (char *)malloc(s1_len + s2_len + 1);
 	if (!strjoin)
 		return (free(s1), NULL);
@@ -102,7 +102,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (free(s1), strjoin);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr_gnl(char *s, int c)
 {
 	while (*s)
 	{
